@@ -51,6 +51,7 @@ const ingredients = (obj) => {
   arr.push(carb);
   arr.push(fat);
   arr.push(protein);
+  return arr;
 }
 // CODE HERE
 

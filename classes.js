@@ -29,6 +29,9 @@ class Employee {
         this.email = email;
         this.age = age;
     }
+    makeWidget () {
+        return `${this.first_name} ${this.last_name} Widget`;
+    }
 }
 
 /*
@@ -96,13 +99,16 @@ class ProgressiveManager {
         this.title = 'Not a manager';
         this.bonus = 0;
     }
-    employeeCheck (add,remove) {
-        let counter = 1;
-        for (let i=0;i<add;i++) {
-            this.reports[i]+=counter;
-            counter++;
-        }
-        
+    hire (employee) {
+        this.reports.push(employee);
+        this.status();
+    }
+    fire (index) {
+        this.reports.splice(index,1);
+        this.bonus+=100;
+        this.status();
+    }
+    status () {
         if (this.reports.length===0) {
             this.title = 'Not a manager';
         } else if (this.reports.length>=1 && this.reports.length<=3) {
@@ -117,7 +123,6 @@ class ProgressiveManager {
             this.title = 'Bestest Manager';
         }
     }
-
 }
 
 
@@ -143,3 +148,23 @@ It can :
       It should set decrease wear_and_tear_count by 10, and set needs_reboot to false
 
 */
+class Machine {
+    constructor () {
+        this.widgets_made_count = 0;
+        this.wear_and_tear_count = 0;
+        this.needs_reboot = false;
+    }
+    makeWidgets (num) {
+        this.widgets_made_count+=num;
+        let counter = num/50;
+        this.wear_and_tear_count+=counter;
+    }
+    fixMachine () {
+        this.needs_reboot = true;
+    }
+    reboot (cb) {
+            this.wear_and_tear_count-=10;
+            this.needs_reboot = false;
+            return cb(); 
+    }
+}
