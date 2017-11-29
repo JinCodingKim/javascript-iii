@@ -97,7 +97,12 @@ class ProgressiveManager {
         this.bonus = 0;
     }
     employeeCheck (add,remove) {
-        this.reports.push(add);
+        let counter = 1;
+        for (let i=0;i<add;i++) {
+            this.reports[i]+=counter;
+            counter++;
+        }
+        
         if (this.reports.length===0) {
             this.title = 'Not a manager';
         } else if (this.reports.length>=1 && this.reports.length<=3) {
@@ -112,6 +117,7 @@ class ProgressiveManager {
             this.title = 'Bestest Manager';
         }
     }
+
 }
 
 
